@@ -1,0 +1,7 @@
+numpy
+scipy
+matplotlib
+dill
+pandas
+tqdm
+pytest
