@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=45", "wheel", "setuptools-scm[toml]>=6.2"]
+requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -14,17 +14,16 @@ authors = [
 ]
 dependencies = [
     "numpy",
-    "scipy",
+    "scipy", 
+    "jupyter",
     "matplotlib",
     "dill",
     "pandas",
     "tqdm",
 ]
 
-[project.optional-dependencies]
-dev = [
-    "pytest",
-]
-
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["*.txt", "*.md", "*.yml", "*.yaml"]

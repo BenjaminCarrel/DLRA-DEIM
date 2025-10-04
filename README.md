@@ -1,6 +1,22 @@
 # DLRA-DEIM
 Numerical experiments for the paper DLRA-DEIM
 
+## Abstract
+
+TBD
+
+## Authors
+
+- Carrel, Benjamin (Paul Scherrer Institute)
+- Kressner, Daniel (EPFL)
+- Lam, Hysan (EPFL)
+- Vandereycken, Bart (University of Geneva)
+
+## Reference
+
+TBD
+
+
 ## Installation
 
 This package requires Python 3.12 or later.
@@ -12,51 +28,98 @@ cd DLRA-DEIM
 ```
 
 ### Install the package
+
+The recommended installation uses a virtual environment. You can use any environment manager (conda, venv, etc.).
+
+#### Using conda (recommended)
 ```bash
+# Create and activate environment
+conda create -n dlra-deim python=3.12
+conda activate dlra-deim
+
+# For Apple Silicon Macs (optional but recommended for performance)
+conda install numpy scipy "libblas=*=*accelerate"
+
+# Install the project in editable mode
 pip install -e .
 ```
 
-This will install the package in editable mode along with all required dependencies:
-- numpy
-- scipy
-- matplotlib
-- dill
-- pandas
-- tqdm
-
-### Install development dependencies
+#### Using venv
 ```bash
-pip install -e ".[dev]"
+# Create and activate environment
+python -m venv dlra-deim
+source dlra-deim/bin/activate  # On Windows: dlra-deim\Scripts\activate
+
+# Install the project in editable mode  
+pip install -e .
 ```
 
-This will additionally install:
-- pytest
-
-## Project Structure
-
-- `src/dlra_deim/`: Source code for the Python package
-- `experiments/`: Experiment scripts that can be run after installation
-
-## Usage
-
-After installation, you can run experiment scripts from the `experiments/` folder:
-
+#### Alternative: Manual dependency installation
+If you prefer to manage dependencies manually:
 ```bash
-python experiments/example_experiment.py
+# Install dependencies first
+pip install -r requirements-dev.txt
+
+# Then install the project in editable mode
+pip install -e . --no-deps
 ```
 
-You can also import the package in your own scripts:
+This installs the source code in editable mode, allowing you to run experiments while making changes to the code.
 
-```python
-import dlra_deim
-```
+### Verify Installation
 
-## Development
-
-### Running tests
+After installation, run the validation script to ensure everything is working:
 ```bash
-pytest
+python validate_installation.py
 ```
+
+This will test all dependencies and core functionality.
+
+
+
+## Project Structure and Usage
+
+This is a research project with the following structure:
+- `src/`: Source code organized into modules:
+  - `dlra_deim/`: Main DLRA-DEIM implementation
+  - `matrix_ode_toolbox/`: Matrix ODE solvers and utilities
+  - `low_rank_toolbox/`: Low-rank matrix operations
+  - `krylov_toolbox/`: Krylov subspace methods
+- `experiments/`: Numerical experiments for the paper
+
+### Running Experiments
+
+After installation, navigate to any experiment folder and run the main script:
+```bash
+cd experiments/allen_cahn_motivation
+python main.py
+```
+
+Each experiment folder contains:
+- `main.py`: Main script that runs the complete experiment
+- `simulation.py`: Generates numerical data
+- `data_processing.py`: Processes and analyzes results  
+- `plotting.py`: Creates figures and visualizations
+- `shared_parameters.py`: Common parameters and configuration
+
+### Development
+
+Since the package is installed in editable mode (`pip install -e .`), any changes to the source code in `src/` are immediately available when running experiments.
+
+### Troubleshooting
+
+**Import errors**: Make sure you've activated your virtual environment and installed the package in editable mode with `pip install -e .`
+
+**Performance issues**: On Apple Silicon Macs, consider installing optimized BLAS libraries:
+```bash
+conda install "libblas=*=*accelerate"
+```
+
+**Missing dependencies**: If you encounter missing package errors, try reinstalling:
+```bash
+pip install -e . --force-reinstall
+```
+
 
 ## License
 

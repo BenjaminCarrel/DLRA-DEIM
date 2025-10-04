@@ -1,3 +1,5 @@
+# Required dependencies
+python>=3.12
 numpy
 scipy
 matplotlib
@@ -5,3 +7,5 @@ dill
 pandas
 tqdm
 pytest
+# Optional: for better performance on Apple Silicon Macs
+# Install separately with conda: conda install "libblas=*=*accelerate"
