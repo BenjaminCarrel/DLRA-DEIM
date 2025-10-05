@@ -1,5 +1,7 @@
 # DLRA-DEIM
-Numerical experiments for the paper DLRA-DEIM
+Numerical experiments for the paper DLRA-DEIM. (TODO: change for official title)
+
+(Add link to paper and bibtex citation template).
 
 ## Abstract
 
@@ -12,9 +14,6 @@ TBD
 - Lam, Hysan (EPFL)
 - Vandereycken, Bart (University of Geneva)
 
-## Reference
-
-TBD
 
 
 ## Installation
@@ -81,7 +80,6 @@ This will test all dependencies and core functionality.
 
 This is a research project with the following structure:
 - `src/`: Source code organized into modules:
-  - `dlra_deim/`: Main DLRA-DEIM implementation
   - `matrix_ode_toolbox/`: Matrix ODE solvers and utilities
   - `low_rank_toolbox/`: Low-rank matrix operations
   - `krylov_toolbox/`: Krylov subspace methods
@@ -97,14 +95,10 @@ python main.py
 
 Each experiment folder contains:
 - `main.py`: Main script that runs the complete experiment
+- `shared_parameters.py`: Common parameters and configuration
 - `simulation.py`: Generates numerical data
 - `data_processing.py`: Processes and analyzes results  
-- `plotting.py`: Creates figures and visualizations
-- `shared_parameters.py`: Common parameters and configuration
-
-### Development
-
-Since the package is installed in editable mode (`pip install -e .`), any changes to the source code in `src/` are immediately available when running experiments.
+- `plotting.py`: Creates figures and visualization
 
 ### Troubleshooting
 
