@@ -1,7 +1,7 @@
 #%% Imports
 import numpy as np
 from shared_parameters import *
-from method_definition import dlra_deim_names, dlra_names
+from method_definition import dlra_deim_names, dlra_names, dlra_legends, dlra_deim_legends
 import pickle
 
 
@@ -43,7 +43,7 @@ import pandas as pd
 
 # Create a DataFrame with the final errors
 print('Final errors:')
-df = pd.DataFrame(final_errors, index=['ref'] + dlra_names + dlra_deim_names, columns=[f'{size}_{rank}' for i, size in enumerate(sizes) for rank in ranks[i]])
+df = pd.DataFrame(final_errors, index=['ref'] + dlra_legends + dlra_deim_legends, columns=[f'{size}_{rank}' for i, size in enumerate(sizes) for rank in ranks[i]])
 # Format the DataFrame to display numbers in scientific notation with 4 significant figures
 pd.options.display.float_format = '{:.4e}'.format
 # Print the DataFrame
@@ -53,7 +53,7 @@ pd.reset_option('display.float_format')
 
 # Create a DataFrame with the time of computation
 print('Time of computation:')
-df_time = pd.DataFrame(time_of_computation, index=['ref'] + dlra_names + dlra_deim_names, columns=[f'{size}_{rank}' for i, size in enumerate(sizes) for rank in ranks[i]])
+df_time = pd.DataFrame(time_of_computation, index=['ref'] + dlra_legends + dlra_deim_legends, columns=[f'{size}_{rank}' for i, size in enumerate(sizes) for rank in ranks[i]])
 # Print the DataFrame
 print(df_time)
 

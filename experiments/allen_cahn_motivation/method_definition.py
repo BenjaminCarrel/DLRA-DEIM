@@ -79,9 +79,9 @@ dlra_deim_kwargs += [{'nb_substeps': nb_substeps,
                                 'use_closed_form': False,
                                 'scipy_method': 'LSODA'
         }]
-dlra_deim_names += [f'DLRA-sQDEIM']
-dlra_deim_legends += [rf'DLRA-sQDEIM ($\eta = 2$)']
-dlra_deim_linestyles += ['s']
+dlra_deim_names += [f'DLRA-SRRQR']
+dlra_deim_legends += [rf'DLRA-SRRQR ($\eta = 2$)']
+dlra_deim_linestyles += ['x']
 
 # OCSS
 dlra_deim_solvers += [ProjectedRungeKuttaDeim]
@@ -96,9 +96,9 @@ dlra_deim_kwargs += [{'nb_substeps': nb_substeps,
                                 'use_closed_form': False,
                                 'scipy_method': 'LSODA'
         }]
-dlra_deim_names += [f'DLRA-OCSS']
-dlra_deim_legends += [f'DLRA-OCSS']
-dlra_deim_linestyles += ['v']
+dlra_deim_names += [f'DLRA-Osinsky']
+dlra_deim_legends += [f'DLRA-Osinsky']
+dlra_deim_linestyles += ['+']
 
 # ARP
 dlra_deim_solvers += [ProjectedRungeKuttaDeim]
@@ -135,17 +135,17 @@ dlra_deim_legends += [rf'DLRA-GPODE ($\ell = {rank}$)']
 dlra_deim_linestyles += ['-']
 
 # sQDEIM+
-dlra_deim_solvers += [ProjectedRungeKuttaDeim]
-# dlra_deim_solvers += ['scipy_dlra_deim']
-dlra_deim_kwargs += [{'nb_substeps': nb_substeps,
-                                'order': order,
-                                'deim_method': 'oversampling_sqdeim',
-                                'deim_kwargs': {'oversampling_size': rank},
-                                'krylov_kwargs': krylov_kwargs,
-                                'strict_order_conditions': True,
-                                'use_closed_form': False,
-                                'scipy_method': 'RK45'
-        }]
-dlra_deim_names += [f'DLRA-sQDEIM+']
-dlra_deim_legends += [rf'DLRA-sQDEIM+ ($\ell = {rank}$)']
-dlra_deim_linestyles += ['-']
+# dlra_deim_solvers += [ProjectedRungeKuttaDeim]
+# # dlra_deim_solvers += ['scipy_dlra_deim']
+# dlra_deim_kwargs += [{'nb_substeps': nb_substeps,
+#                                 'order': order,
+#                                 'deim_method': 'oversampling_sqdeim',
+#                                 'deim_kwargs': {'oversampling_size': rank},
+#                                 'krylov_kwargs': krylov_kwargs,
+#                                 'strict_order_conditions': True,
+#                                 'use_closed_form': False,
+#                                 'scipy_method': 'RK45'
+#         }]
+# dlra_deim_names += [f'DLRA-sQDEIM+']
+# dlra_deim_legends += [rf'DLRA-sQDEIM+ ($\ell = {rank}$)']
+# dlra_deim_linestyles += ['-']

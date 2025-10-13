@@ -11,6 +11,7 @@ colors = ['#1f77b4', '#ff7f0e']
 dlra_solvers = []
 dlra_kwargs = []
 dlra_names = []
+dlra_legends = []
 dlra_linestyles = []
 dlra_colors = []
 
@@ -23,6 +24,7 @@ dlra_kwargs += [{'order': 1,
                 'krylov_kwargs': krylov_kwargs
                 }]
 dlra_names += [f'PERK1']
+dlra_legends += [f'PERK1']
 dlra_linestyles += ['-.']
 dlra_colors += [colors[0]]
 
@@ -35,6 +37,7 @@ dlra_kwargs += [{'order': 2,
                 'krylov_kwargs': krylov_kwargs
                 }]
 dlra_names += [f'PERK2']
+dlra_legends += [f'PERK2']
 dlra_linestyles += ['-.']
 dlra_colors += [colors[1]]
 
@@ -44,6 +47,7 @@ dlra_colors += [colors[1]]
 dlra_deim_solvers = []
 dlra_deim_kwargs = []
 dlra_deim_names = []
+dlra_deim_legends = []
 dlra_deim_linestyles = []
 dlra_deim_colors = []
 
@@ -57,7 +61,8 @@ dlra_deim_kwargs += [{'order': 1,
                       'deim_kwargs': {},
                       'krylov_kwargs': krylov_kwargs
                     }]
-dlra_deim_names += [f'PERK1-sQDEIM']
+dlra_deim_names += [rf'PERK1-SRRQR']
+dlra_deim_legends += [rf'PERK1-SRRQR ($\eta=2$)']
 dlra_deim_linestyles += ['-']
 dlra_deim_colors += [colors[0]]
 
@@ -71,7 +76,8 @@ dlra_deim_kwargs += [{'order': 2,
                       'deim_kwargs': {},
                       'krylov_kwargs': krylov_kwargs
                     }]
-dlra_deim_names += [f'PERK2-sQDEIM']
+dlra_deim_names += [rf'PERK2-SRRQR']
+dlra_deim_legends += [rf'PERK2-SRRQR ($\eta=2$)']
 dlra_deim_linestyles += ['-']
 dlra_deim_colors += [colors[1]]
 

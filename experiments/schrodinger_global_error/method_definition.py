@@ -11,6 +11,7 @@ colors = ['#1f77b4', '#ff7f0e', '#2ca02c']
 dlra_solvers = []
 dlra_kwargs = []
 dlra_names = []
+dlra_legends = []
 dlra_linestyles = []
 dlra_colors = []
 
@@ -18,6 +19,7 @@ dlra_colors = []
 dlra_solvers += ['PRK']
 dlra_kwargs += [{'order': 1}]
 dlra_names += [f'PRK1']
+dlra_legends += [f'PRK1']
 dlra_linestyles += ['-']
 dlra_colors += [colors[0]]
 
@@ -25,6 +27,7 @@ dlra_colors += [colors[0]]
 dlra_solvers += ['PRK']
 dlra_kwargs += [{'order': 2}]
 dlra_names += [f'PRK2']
+dlra_legends += [f'PRK2']
 dlra_linestyles += ['-']
 dlra_colors += [colors[1]]
 
@@ -32,6 +35,7 @@ dlra_colors += [colors[1]]
 dlra_solvers += ['PRK']
 dlra_kwargs += [{'order': 3}]
 dlra_names += [f'PRK3']
+dlra_legends += [f'PRK3']
 dlra_linestyles += ['-']
 dlra_colors += [colors[2]]
 
@@ -41,28 +45,31 @@ dlra_colors += [colors[2]]
 dlra_deim_solvers = []
 dlra_deim_kwargs = []
 dlra_deim_names = []
+dlra_deim_legends = []
 dlra_deim_linestyles = []
 dlra_deim_colors = []
 
-# PRK1 - sQDEIM
+# PRK1 - sRRQR
 dlra_deim_solvers += [ProjectedRungeKuttaDeim]
 dlra_deim_kwargs += [{'nb_substeps': nb_substeps, 
             'order': 1,
             'deim_method': 'sqdeim',
             'deim_kwargs': {}
             }]
-dlra_deim_names += [f'PRK1-sQDEIM']
+dlra_deim_names += [rf'PRK1-SRRQR']
+dlra_deim_legends += [rf'PRK1-SRRQR ($\eta=2$)']
 dlra_deim_linestyles += ['s']
 dlra_deim_colors += [colors[0]]
 
-# PRK2 - sQDEIM
+# PRK2 - sRRQR
 dlra_deim_solvers += [ProjectedRungeKuttaDeim]
 dlra_deim_kwargs += [{'nb_substeps': nb_substeps, 
             'order': 2, 
             'deim_method': 'sqdeim',
             'deim_kwargs': {}
             }]
-dlra_deim_names += [f'PRK2-sQDEIM']
+dlra_deim_names += [rf'PRK2-SRRQR']
+dlra_deim_legends += [rf'PRK2-SRRQR ($\eta=2$)']
 dlra_deim_linestyles += ['s']
 dlra_deim_colors += [colors[1]]
 
@@ -73,6 +80,7 @@ dlra_deim_kwargs += [{'nb_substeps': nb_substeps,
       'deim_method': 'sqdeim',
       'deim_kwargs': {}
       }]
-dlra_deim_names += [f'PRK3-sQDEIM']
+dlra_deim_names += [rf'PRK3-SRRQR']
+dlra_deim_legends += [rf'PRK3-SRRQR ($\eta=2$)']
 dlra_deim_linestyles += ['s']
 dlra_deim_colors += [colors[2]]

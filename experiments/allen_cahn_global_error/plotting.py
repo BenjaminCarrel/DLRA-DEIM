@@ -1,7 +1,7 @@
 #%% Imports
 import matplotlib.pyplot as plt
 from shared_parameters import *
-from method_definition import dlra_deim_names, dlra_names, dlra_deim_linestyles, dlra_linestyles, dlra_colors, dlra_deim_colors
+from method_definition import dlra_deim_names, dlra_names, dlra_deim_linestyles, dlra_linestyles, dlra_colors, dlra_deim_colors, dlra_deim_legends, dlra_legends
 
 import os
 data_path = f"data/size_{size}/rank_{rank}/time_{t_span[1]}_steps_{nb_steps}/substeps_{nb_substeps}"
@@ -35,9 +35,9 @@ plt.rcParams['figure.autolayout'] = True
 #%% Plot the global error
 fig = plt.figure()
 for i in range(len(dlra_names)):
-    plt.loglog(stepsizes, global_errors_dlra[:, i], dlra_linestyles[i], color=dlra_colors[i], label=dlra_names[i])
+    plt.loglog(stepsizes, global_errors_dlra[:, i], dlra_linestyles[i], color=dlra_colors[i], label=dlra_legends[i])
 for i in range(len(dlra_deim_names)):
-    plt.loglog(stepsizes, global_errors_dlra_deim[:, i], dlra_deim_linestyles[i], color=dlra_deim_colors[i], label=dlra_deim_names[i])
+    plt.loglog(stepsizes, global_errors_dlra_deim[:, i], dlra_deim_linestyles[i], color=dlra_deim_colors[i], label=dlra_deim_legends[i])
 plt.loglog(stepsizes, best_error[-1] * np.ones(len(stepsizes)), 'k--', label=f'Best rank {rank} approximation')
 plt.xlabel('Number of substeps')
 plt.ylabel('Global error')

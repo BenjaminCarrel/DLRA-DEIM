@@ -10,7 +10,7 @@ t_eval = np.linspace(t_span[0], t_span[1], nb_steps+1)
 dt = t_eval[1] - t_eval[0]
 
 # DLRA solvers parameters
-rank = 8
+rank = 6
 order = 2
 nb_substeps = 100
 krylov_kwargs = {'size': 2, 'kind': 'extended'}
