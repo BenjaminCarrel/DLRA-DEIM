@@ -6,7 +6,7 @@ General class for implementing DLRA-DEIM solvers.
 
 #%% Imports
 import numpy as np
-from low_rank_toolbox import LowRankMatrix, DEIM, QDEIM, gpode, gpodr, ARP, OCSS, sQDEIM, oversampling_sQDEIM
+from low_rank_toolbox import LowRankMatrix, DEIM, QDEIM, gpode, gpodr, ARP, Osinsky, sQDEIM, oversampling_sQDEIM
 from matrix_ode_toolbox import MatrixOde
 
 #%% Common class for the DLRA-DEIM solvers
@@ -26,16 +26,13 @@ class DlraDeimSolver:
     name = 'Generic DLRA-DEIM'
 
     # List of available DEIM methods
-    _deim_methods = {'DEIM': DEIM,
-                        'deim': DEIM,
-                        'QDEIM': QDEIM,
+    _deim_methods = {'deim': DEIM,
                         'qdeim': QDEIM,
-                        'sQDEIM': sQDEIM,
                         'sqdeim': sQDEIM,
-                        'ARP': ARP,
+                        'srrqr': sQDEIM,
                         'arp': ARP,
-                        'OCSS': OCSS,
-                        'ocss': OCSS,
+                        'ocss': Osinsky,
+                        'osinsky': Osinsky,
                         'gpode': gpode,
                         'gpodr': gpodr,
                         'oversampling_sqdeim': oversampling_sQDEIM}
@@ -87,7 +84,7 @@ class DlraDeimSolver:
             raise ValueError("deim_method must be a string.")
         if not isinstance(deim_kwargs, dict):
             raise ValueError("deim_kwargs must be a dictionary.")
-        if not deim_method in self._deim_methods:
+        if not deim_method.lower() in self._deim_methods:
             raise ValueError(f"deim_method must be one of {self._deim_methods.keys()}.")
         
         # Save the arguments
@@ -96,7 +93,7 @@ class DlraDeimSolver:
         self.extra_kwargs = extra_kwargs
 
         # Process the DEIM arguments
-        self.deim_method = deim_method
+        self.deim_method = deim_method.lower()
         self.deim_kwargs = deim_kwargs
 
         # Store extra args
