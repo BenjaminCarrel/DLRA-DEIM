@@ -2,9 +2,9 @@ import numpy as np
 from numpy import ndarray
 import scipy.linalg as la
 
-def OCSS(U: ndarray, compute_M: bool = False) -> list:
+def Osinsky(U: ndarray, compute_M: bool = False) -> list:
     """
-    Osinsky's OCSS algorithm for row selection via QR decomposition.
+    Osinsky's quasi optimal column subset selection algorithm.
 
     Reference:
         "Close to optimal column approximations with a single SVD." by A.I. Osinsky, 2023.
@@ -33,7 +33,8 @@ def OCSS(U: ndarray, compute_M: bool = False) -> list:
         # --- Pivot Selection ---
         current_sub_A = A[k:r, k:n] 
         # Use **2 for real matrices instead of np.abs()**2
-        norms_sq = np.sum(current_sub_A**2, axis=0) 
+        #norms_sq = np.sum(current_sub_A**2, axis=0) 
+        norms_sq = np.sum(np.abs(current_sub_A)**2, axis=0)   # CHANGED to absolute value for complex matrices
         current_l = l_scores[k:n]
         
         # Criterion: norms_sq / (1 + l_j), handle small norms/denominators
@@ -64,7 +65,8 @@ def OCSS(U: ndarray, compute_M: bool = False) -> list:
             # Real Householder update: v[0] = x[0] + sign(x[0]) * ||x||
             # np.copysign handles sign(0) returning 1 (or -1 depending on impl)
             # If alpha is exactly 0, copysign(norm_x, 0.0) returns norm_x.
-            v[0] = alpha + np.copysign(norm_x, alpha if alpha != 0 else 1.0)
+            # v[0] = alpha + np.copysign(norm_x, alpha if alpha != 0 else 1.0)
+            v[0] = alpha + np.sign(x[0]) * norm_x
             
             norm_v = np.linalg.norm(v)
 
@@ -73,16 +75,18 @@ def OCSS(U: ndarray, compute_M: bool = False) -> list:
                 # Apply reflection: A_sub = A_sub - 2 * v * (v.T @ A_sub)
                 sub_matrix_to_update = A[k:r, k:n]
                 # Use v.T @ ... for dot product with real vector v
-                vT_Asub = v.T.dot(sub_matrix_to_update)
+                vT_Asub = v.T.conj().dot(sub_matrix_to_update)  # CHANGED to conjugate transpose for complex matrices
                 A[k:r, k:n] -= 2 * np.outer(v, vT_Asub)
                 d_update = A[k, k:n].copy() # Get updated row slice
 
         # --- Update Scores ---
         # Use **2 for real scores update
-        l_scores[k:n] += d_update**2 
+        l_scores[k:n] += np.abs(d_update)**2  # CHANGED to absolute value for complex matrices
+        #l_scores[k:n] += d_update**2  # CHANGED to absolute value for complex matrices
     # --- End Loop ---
 
     if compute_M:
         M = la.solve(U[P[:r], :].T.conj(), U.T.conj()).T.conj()
         return P[:r], M
     return P[:r]
+
