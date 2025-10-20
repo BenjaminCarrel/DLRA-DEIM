@@ -2,7 +2,7 @@ import numpy as np
 from numpy import ndarray
 import scipy.linalg as la
 
-def Osinsky(U: ndarray, compute_M: bool = False) -> list:
+def Osinsky(U: ndarray, compute_M: bool = False, return_Uk: bool = False) -> list:
     """
     Osinsky's quasi optimal column subset selection algorithm.
 
@@ -15,6 +15,8 @@ def Osinsky(U: ndarray, compute_M: bool = False) -> list:
         Orthonormal real matrix of shape (n, r) defining a row space approximation
     compute_M : bool
         If True, return also the matrix U @ inv(U[S, :])
+    return_Uk : bool
+        If True, return also the modified matrix Uk after applying Householder reflections.
 
     Returns
     -------
@@ -24,23 +26,22 @@ def Osinsky(U: ndarray, compute_M: bool = False) -> list:
         Matrix U @ inv(U[S, :])
     """
     n, r = U.shape
-    A = U.T.copy()
+    if r > n:
+        raise ValueError("Number of columns r must be less than or equal to number of rows n.")
+    Uk = U.T.copy()
     P = np.arange(n) 
     l_scores = np.zeros(n)
     eps = np.finfo(np.float64).eps # Machine epsilon for float64
 
     for k in range(r):
         # --- Pivot Selection ---
-        current_sub_A = A[k:r, k:n] 
-        # Use **2 for real matrices instead of np.abs()**2
-        #norms_sq = np.sum(current_sub_A**2, axis=0) 
-        norms_sq = np.sum(np.abs(current_sub_A)**2, axis=0)   # CHANGED to absolute value for complex matrices
+        current_sub_Uk = Uk[k:r, k:n] 
+        norms_sq = np.linalg.norm(current_sub_Uk, axis=0)**2
         current_l = l_scores[k:n]
         
         # Criterion: norms_sq / (1 + l_j), handle small norms/denominators
         denominators = 1.0 + current_l
         pivot_vals = np.zeros_like(denominators)
-        # Check against epsilon^2 for squared norms? Or just eps? Use eps for norm check.
         valid_mask = norms_sq > eps 
         pivot_vals[valid_mask] = norms_sq[valid_mask] / denominators[valid_mask]
             
@@ -49,35 +50,28 @@ def Osinsky(U: ndarray, compute_M: bool = False) -> list:
 
         # --- Swap ---
         if k != j_pivot:
-            A[:, [k, j_pivot]] = A[:, [j_pivot, k]]
+            Uk[:, [k, j_pivot]] = Uk[:, [j_pivot, k]]
             P[k], P[j_pivot] = P[j_pivot], P[k]
             l_scores[k], l_scores[j_pivot] = l_scores[j_pivot], l_scores[k]
             
         # --- Householder Reflection ---
-        x = A[k:r, k].copy()
+        x = Uk[k:r, k].copy()
         norm_x = np.linalg.norm(x)
-        d_update = A[k, k:n].copy() # Initialize update scores from current row
+        d_update = Uk[k, k:n].copy() # Initialize update scores from current row
 
         if norm_x > eps: 
             alpha = x[0]
-            v = x 
-            
-            # Real Householder update: v[0] = x[0] + sign(x[0]) * ||x||
-            # np.copysign handles sign(0) returning 1 (or -1 depending on impl)
-            # If alpha is exactly 0, copysign(norm_x, 0.0) returns norm_x.
-            # v[0] = alpha + np.copysign(norm_x, alpha if alpha != 0 else 1.0)
-            v[0] = alpha + np.sign(x[0]) * norm_x
-            
+            v = x
+            v[0] = alpha - np.sign(x[0]) * norm_x
             norm_v = np.linalg.norm(v)
 
             if norm_v > eps:
                 v /= norm_v
-                # Apply reflection: A_sub = A_sub - 2 * v * (v.T @ A_sub)
-                sub_matrix_to_update = A[k:r, k:n]
-                # Use v.T @ ... for dot product with real vector v
-                vT_Asub = v.T.conj().dot(sub_matrix_to_update)  # CHANGED to conjugate transpose for complex matrices
-                A[k:r, k:n] -= 2 * np.outer(v, vT_Asub)
-                d_update = A[k, k:n].copy() # Get updated row slice
+                # Apply reflection: A_sub = A_sub - 2 * v * (v.H @ A_sub)
+                sub_matrix_to_update = Uk[k:r, k:n]
+                vT_Asub = v.T.conj().dot(sub_matrix_to_update)
+                Uk[k:r, k:n] -= 2 * np.outer(v, vT_Asub)
+                d_update = Uk[k, k:n].copy()
 
         # --- Update Scores ---
         # Use **2 for real scores update
@@ -87,6 +81,33 @@ def Osinsky(U: ndarray, compute_M: bool = False) -> list:
 
     if compute_M:
         M = la.solve(U[P[:r], :].T.conj(), U.T.conj()).T.conj()
+        if return_Uk:
+            return P[:r], M, Uk
         return P[:r], M
+    if return_Uk:
+        return P[:r], Uk
     return P[:r]
+
+if __name__ == "__main__":
+    # Example usage - real case
+    np.random.seed(0)
+    ## Tall matrix with orthonormal columns
+    print("Real case -- Tall matrix with orthonormal columns")
+    n, r = 10, 4
+    U = np.random.randn(n, r)
+    U, _ = la.qr(U, mode='economic')
+
+    J, Uk = Osinsky(U, compute_M=False, return_Uk=True)
+    print("Selected indices J:", J)
+    print("Matrix U:\n", Uk)
+
+    # Example usage - complex case
+    print("\nComplex case -- Tall matrix with orthonormal columns")
+    U_complex = np.random.randn(n, r) + 1j * np.random.randn(n, r)
+    U_complex, _ = la.qr(U_complex, mode='economic')
+
+    J_complex, Uk_complex = Osinsky(U_complex, compute_M=False, return_Uk=True)
+    print("Selected indices J (complex case):", J_complex)
+    print("Matrix U (complex case):\n", Uk_complex)
+
 
