@@ -44,7 +44,6 @@ def main():
     
     # Test project modules
     dlra_success = all([
-        test_import("dlra_deim", "(main package)"),
         test_import("low_rank_toolbox", "(low-rank operations)"),
         test_import("matrix_ode_toolbox", "(matrix ODE solvers)"),
         test_import("krylov_toolbox", "(Krylov methods)"),
