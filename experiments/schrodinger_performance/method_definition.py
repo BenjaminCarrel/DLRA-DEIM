@@ -49,74 +49,77 @@ dlra_deim_legends = []
 dlra_deim_linestyles = []
 dlra_deim_colors = []
 
-# PRK1 - Osinsky
-dlra_deim_solvers += [ProjectedRungeKuttaDeim]
-dlra_deim_kwargs += [{'nb_substeps': nb_substeps, 
-            'order': 1,
-            'deim_method': 'OCSS',
-            'deim_kwargs': {}
-            }]
-dlra_deim_names += [rf'PRK1-Osinsky']
-dlra_deim_legends += [rf'PRK1-Osinsky']
-dlra_deim_linestyles += ['-']
-dlra_deim_colors += [colors[0]]
-
-# PRK2 - Osinsky
-dlra_deim_solvers += [ProjectedRungeKuttaDeim]
-dlra_deim_kwargs += [{'nb_substeps': nb_substeps, 
-            'order': 2, 
-            'deim_method': 'OCSS',
-            'deim_kwargs': {}
-            }]
-dlra_deim_names += [rf'PRK2-Osinsky']
-dlra_deim_legends += [rf'PRK2-Osinsky']
-dlra_deim_linestyles += ['-']
-dlra_deim_colors += [colors[1]]
-
-# PRK3 - Osinsky
-dlra_deim_solvers += [ProjectedRungeKuttaDeim]
-dlra_deim_kwargs += [{'nb_substeps': nb_substeps, 
-      'order': 3, 
-      'deim_method': 'OCSS',
-      'deim_kwargs': {}
-      }]
-dlra_deim_names += [rf'PRK3-Osinsky']
-dlra_deim_legends += [rf'PRK3-Osinsky']
-dlra_deim_linestyles += ['-']
-dlra_deim_colors += [colors[2]]
-
-# # PRK1 - ARP
+# # PRK1 - Osinsky
 # dlra_deim_solvers += [ProjectedRungeKuttaDeim]
 # dlra_deim_kwargs += [{'nb_substeps': nb_substeps, 
 #             'order': 1,
-#             'deim_method': 'arp',
+#             'deim_method': 'OCSS',
 #             'deim_kwargs': {}
 #             }]
-# dlra_deim_names += [f'PRK1-ARP']
+# dlra_deim_names += [rf'PRK1-Osinsky']
+# dlra_deim_legends += [rf'PRK1-Osinsky']
 # dlra_deim_linestyles += ['-']
 # dlra_deim_colors += [colors[0]]
 
-# # PRK2 - ARP
+# # PRK2 - Osinsky
 # dlra_deim_solvers += [ProjectedRungeKuttaDeim]
 # dlra_deim_kwargs += [{'nb_substeps': nb_substeps, 
 #             'order': 2, 
-#             'deim_method': 'arp',
+#             'deim_method': 'OCSS',
 #             'deim_kwargs': {}
 #             }]
-# dlra_deim_names += [f'PRK2-ARP']
+# dlra_deim_names += [rf'PRK2-Osinsky']
+# dlra_deim_legends += [rf'PRK2-Osinsky']
 # dlra_deim_linestyles += ['-']
 # dlra_deim_colors += [colors[1]]
 
-# # PRK3 - APR
+# # PRK3 - Osinsky
 # dlra_deim_solvers += [ProjectedRungeKuttaDeim]
 # dlra_deim_kwargs += [{'nb_substeps': nb_substeps, 
 #       'order': 3, 
-#       'deim_method': 'arp',
+#       'deim_method': 'OCSS',
 #       'deim_kwargs': {}
 #       }]
-# dlra_deim_names += [f'PRK3-ARP']
+# dlra_deim_names += [rf'PRK3-Osinsky']
+# dlra_deim_legends += [rf'PRK3-Osinsky']
 # dlra_deim_linestyles += ['-']
 # dlra_deim_colors += [colors[2]]
+
+# PRK1 - ARP
+dlra_deim_solvers += [ProjectedRungeKuttaDeim]
+dlra_deim_kwargs += [{'nb_substeps': nb_substeps, 
+            'order': 1,
+            'deim_method': 'arp',
+            'deim_kwargs': {}
+            }]
+dlra_deim_names += [f'PRK1-ARP']
+dlra_deim_legends += [f'PRK1-ARP']
+dlra_deim_linestyles += ['-']
+dlra_deim_colors += [colors[0]]
+
+# PRK2 - ARP
+dlra_deim_solvers += [ProjectedRungeKuttaDeim]
+dlra_deim_kwargs += [{'nb_substeps': nb_substeps, 
+            'order': 2, 
+            'deim_method': 'arp',
+            'deim_kwargs': {}
+            }]
+dlra_deim_names += [f'PRK2-ARP']
+dlra_deim_legends += [f'PRK2-ARP']
+dlra_deim_linestyles += ['-']
+dlra_deim_colors += [colors[1]]
+
+# PRK3 - APR
+dlra_deim_solvers += [ProjectedRungeKuttaDeim]
+dlra_deim_kwargs += [{'nb_substeps': nb_substeps, 
+      'order': 3, 
+      'deim_method': 'arp',
+      'deim_kwargs': {}
+      }]
+dlra_deim_names += [f'PRK3-ARP']
+dlra_deim_legends += [f'PRK3-ARP']
+dlra_deim_linestyles += ['-']
+dlra_deim_colors += [colors[2]]
 
 
 

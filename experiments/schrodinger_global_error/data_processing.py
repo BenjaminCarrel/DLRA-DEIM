@@ -22,7 +22,7 @@ for i in range(len(Xs_ref)):
 
 #%% Compute the global error for several step sizes
 global_errors_dlra = np.zeros((len(stepsizes), len(dlra_names)))
-global_errors_dlra_deim = np.zeros((len(stepsizes), len(dlra_names)))
+global_errors_dlra_deim = np.zeros((len(stepsizes), len(dlra_deim_names)))
 
 # Loop over the number of steps
 for i, nb in enumerate(nb_substeps):
