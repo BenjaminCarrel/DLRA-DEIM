@@ -1,9 +1,6 @@
-# DLRA-DEIM
+# Interpolatory Dynamical Low-Rank Approximation: Theoretical Foundations and Algorithms
 
-Numerical experiments for the PRK-DEIM section of our paper
-
-**Interpolatory Dynamical Low-Rank Approximation:
-Theoretical Foundations and Algorithms**
+This repository contains numerical experiments from Section 4 "PRK-DEIM: Projected Runge-Kutta DEIM" of the above mentioned paper.
 
 *Link to arXiv:* TBD.
 
