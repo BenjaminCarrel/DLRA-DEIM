@@ -1,11 +1,27 @@
 # DLRA-DEIM
-Numerical experiments for the paper DLRA-DEIM. (TODO: change for official title)
 
-(Add link to paper and bibtex citation template).
+Numerical experiments for the PRK-DEIM section of our paper
+
+**Interpolatory Dynamical Low-Rank Approximation:
+Theoretical Foundations and Algorithms**
+
+*Link to arXiv:* TBD.
+
+*Bibtex (temporary) template for citation:* TBD.
 
 ## Abstract
 
-TBD
+Dynamical low-rank approximation (DLRA) is a widely used paradigm for solving large-scale matrix differential equations, as they arise, for example, from the discretization of time-dependent partial differential equations on tensorized domains. 
+Through orthogonally projecting the dynamics onto the tangent space of a low-dimensional manifold, DLRA achieves a significant reduction of the storage required to represent the solution. 
+However, the need for evaluating the velocity field can make it challenging to attain a corresponding reduction of
+computational cost in the presence of nonlinearities. 
+In this work, we address this challenge by replacing orthogonal tangent space projections with oblique, data-sparse projections selected by a discrete empirical interpolation method (DEIM). 
+At the continuous-time level, this leads to DLRA-DEIM, a well-posed differential inclusion (in the Filippov sense) that captures the discontinuities induced by changes in the indices selected by DEIM. 
+We establish an existence result, exactness property and error bound for DLRA-DEIM that match existing results for DLRA. 
+For the particular case of QDEIM, a popular variant of DEIM, we provide an explicit convex-polytope characterization of the differential inclusion. 
+Building on DLRA-DEIM, we propose a new class of projected integrators, called PRK-DEIM, that combines explicit Runge–Kutta methods with DEIM-based projections. 
+We analyze the convergence order of PRK-DEIM and show that it matches the accuracy of previously proposed projected Runge-Kutta methods, while being significantly cheaper. 
+Extensions to exponential Runge–Kutta methods and low-order tensor differential equations demonstrate the versatility of our framework.
 
 ## Authors
 
@@ -18,7 +34,7 @@ TBD
 
 ## Installation
 
-This package requires Python 3.12 or later.
+This package requires Python 3.12 or later, and numpy 2.0 or later.
 
 ### Clone the repository
 ```bash
