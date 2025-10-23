@@ -2,9 +2,22 @@
 
 This repository contains numerical experiments from Section 4 "PRK-DEIM: Projected Runge-Kutta DEIM" of the above mentioned paper.
 
-*Link to arXiv:* TBD.
+*Link to arXiv:* [http://arxiv.org/abs/2510.19518](http://arxiv.org/abs/2510.19518)
 
-*Bibtex (temporary) template for citation:* TBD.
+*Bibtex (temporary) template for citation:* 
+
+```
+@misc{carrel2025interpolatorydynamicallowrankapproximation,
+      title={Interpolatory Dynamical Low-Rank Approximation: Theoretical Foundations and Algorithms}, 
+      author={Benjamin Carrel and Daniel Kressner and Hei Yin Lam and Bart Vandereycken},
+      year={2025},
+      eprint={2510.19518},
+      archivePrefix={arXiv},
+      primaryClass={math.NA},
+      url={https://arxiv.org/abs/2510.19518}, 
+}
+```
+
 
 ## Abstract
 
